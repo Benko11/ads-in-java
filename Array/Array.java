@@ -31,15 +31,13 @@ public abstract class Array<E> {
         this.arr = (E[]) new Object[capacity];
     }
 
-    abstract public void insert(E value) throws ArrayFullException, ArrayOutOfRange;
+    abstract public void insert(E value) throws ArrayFullException, ArrayOutOfRange, UniqueArrayDuplicateException;
     abstract public void insert(E[] values);
     abstract public E getItem(int index) throws ArrayOutOfRange;
     abstract public void setItem(int index, E value) throws ArrayOutOfRange;
     abstract public int search(E value, int skip) throws ArrayOutOfRange;
     abstract public E delete(int index) throws ArrayOutOfRange;
     abstract public Integer[] delete(E value);
-    abstract public boolean isEmpty();
-    abstract public boolean isFull();
 
     public String toString() {
         return Arrays.toString(arr);
@@ -80,5 +78,29 @@ public abstract class Array<E> {
         }
 
         return false;
+    }
+
+    public boolean isFull() {
+        for (int i = 0; i < capacity; i++) {
+            try {
+                if (getItem(i) == null) return false;
+            } catch (Exception e) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public boolean isEmpty() {
+        for (int i = 0; i < capacity; i++) {
+            try {
+                if (getItem(i) != null) return false;
+            } catch (Exception e) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

@@ -5,7 +5,7 @@ import org.junit.Test;
 
 public class Application {
     @Test
-    public void test1() throws ArrayOutOfRange, ArrayFullException {
+    public void test1() throws ArrayOutOfRange, ArrayFullException, UniqueArrayDuplicateException {
         var arr = new ArrayNormal(10);
         arr.insert(new Object[]{1, 7, 4, 3});
 
@@ -51,5 +51,28 @@ public class Application {
 
         assertEquals(arr5, arr6);
         assertNotEquals(arr5, arr7);
+
+        var arr8 = new ArrayNormal(new Object[]{1, 7, 4, 1, 3, 2, 0, 7, 7, 2});
+        assertEquals(arr8.search(2, 1), 9);
+        assertEquals(arr8.search(2, 2), -1);
+        assertEquals(arr8.search(2, -1), -1);
+        assertEquals(arr8.search(7, 2), 8);
+    }
+
+    @Test
+    public void test2() throws UniqueArrayDuplicateException, ArrayFullException, ArrayOutOfRange {
+        var arr1 = new UniqueArray(10);
+        arr1.insert(new Object[]{2, 7, 8, 9});
+        assertTrue(arr1.contains(2) && arr1.contains(9));
+
+        assertThrows(UniqueArrayDuplicateException.class, () -> {
+            arr1.insert(8);
+        });
+
+        arr1.delete(new Object[]{8}[0]);
+        arr1.delete(2);
+        System.out.println(arr1);
+
+        assertTrue(!arr1.contains(8) && !arr1.contains(9));
     }
 }

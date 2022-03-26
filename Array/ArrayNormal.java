@@ -18,7 +18,7 @@ public class ArrayNormal<E> extends Array<E> {
     }
 
     @Override
-    public void insert(E value) throws ArrayFullException, ArrayOutOfRange {
+    public void insert(E value) throws ArrayFullException, ArrayOutOfRange, UniqueArrayDuplicateException {
         int index = -1;
         for (int i = 0; i < super.capacity; i++) {
             if (getItem(i) == null) {
@@ -58,6 +58,8 @@ public class ArrayNormal<E> extends Array<E> {
 
     @Override
     public int search(E value, int skip) throws ArrayOutOfRange {
+        if (skip < 0) return -1;
+
         int matches = 0;
 
         for (int i = 0; i < super.capacity; i++) {
@@ -113,31 +115,5 @@ public class ArrayNormal<E> extends Array<E> {
         }
 
         return values;
-    }
-
-    @Override
-    public boolean isFull() {
-        for (int i = 0; i < capacity; i++) {
-            try {
-                if (getItem(i) == null) return false;
-            } catch (Exception e) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        for (int i = 0; i < capacity; i++) {
-            try {
-                if (getItem(i) != null) return false;
-            } catch (Exception e) {
-                return false;
-            }
-        }
-
-        return true;
     }
 }
