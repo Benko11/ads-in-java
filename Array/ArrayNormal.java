@@ -105,7 +105,6 @@ public class ArrayNormal<E> extends Array<E> {
             if (v == null) break;
 
             try {
-                System.out.println(v);
                 delete(v - remove);
                 remove++;
             } catch (Exception e) {

@@ -45,6 +45,19 @@ public abstract class Array<E> {
         return Arrays.toString(arr);
     }
 
+    public int length() {
+        return capacity;
+    }
+
+    public int lengthNotNull() {
+        int count = 0;
+        for (int i = 0; i < capacity; i++) {
+            if (arr[i] != null) count++;
+        }
+
+        return count;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -58,5 +71,14 @@ public abstract class Array<E> {
         int result = Objects.hash(capacity);
         result = 31 * result + Arrays.hashCode(arr);
         return result;
+    }
+
+    public boolean contains(E value) {
+        for (int i = 0; i < capacity; i++) {
+            if (arr[i] == null) continue;
+            if (arr[i].equals(value)) return true;
+        }
+
+        return false;
     }
 }
