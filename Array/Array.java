@@ -1,6 +1,7 @@
 package Array;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 class ArrayFullException extends Exception {}
 class ArrayOutOfRange extends Exception {}
@@ -42,5 +43,20 @@ public abstract class Array<E> {
 
     public String toString() {
         return Arrays.toString(arr);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Array<?> array = (Array<?>) o;
+        return capacity == array.capacity && Arrays.equals(arr, array.arr);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(capacity);
+        result = 31 * result + Arrays.hashCode(arr);
+        return result;
     }
 }

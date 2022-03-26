@@ -45,5 +45,12 @@ public class Application {
         while (!arr4.isEmpty()) {
             arr4.delete(0);
         }
+
+        var arr5 = new ArrayNormal(4);
+        arr5.insert(new Object[]{1, 1, 3, 1});
+        var arr6 = new ArrayNormal(5);
+        arr6.insert(new Object[]{1, 1, 3, 1});
+
+        System.out.println(arr5.equals(arr6));
     }
 }
