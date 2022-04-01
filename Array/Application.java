@@ -3,6 +3,8 @@ package Array;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 public class Application {
     @Test
     public void test1() throws ArrayOutOfRange, ArrayFullException, UniqueArrayDuplicateException {
@@ -74,5 +76,54 @@ public class Application {
         System.out.println(arr1);
 
         assertTrue(!arr1.contains(8) && !arr1.contains(9));
+    }
+
+    @Test
+    public void test3() throws ArrayFullException, ArrayOutOfRange {
+        var arr1 = new SortedArray(11);
+        arr1.insert(new Object[]{31}[0]);
+        assertTrue(arr1.contains(31));
+        assertEquals(31, arr1.getItem(0));
+
+        arr1.insert(new Object[]{27}[0]);
+        assertTrue(arr1.contains(27) && arr1.contains(31));
+        assertEquals(27, arr1.getItem(0));
+
+        arr1.insert(new Object[]{16, 98, 13, 15, 60, 76, 9, 11, 13, 17, 18, 19, 20});
+
+        var arr2 = new SortedArray(11);
+        arr2.insert(new Object[]{9, 11, 13, 13, 15, 16, 27, 31, 60, 76, 98});
+        assertTrue(arr1.equals(arr2));
+        assertTrue(arr1.contains(13));
+        assertTrue(!arr1.contains(17));
+
+        assertThrows(ArrayFullException.class, () -> {
+           arr1.insert(3);
+        });
+        assertEquals(1, arr1.search(11, 0));
+        assertEquals(10, arr1.search(98, 0));
+        assertEquals(arr1.search(13, 0), 2);
+        assertEquals(arr1.search(13, 1), 3);
+        assertEquals(arr1.search(13, 2), -1);
+        assertEquals(arr1.search(15, 0), 4);
+        assertEquals(arr1.search(15, 1), -1);
+        assertEquals(arr1.search(20, 1), -1);
+        assertEquals(arr1.search(17, 1), -1);
+        assertEquals(arr1.search(9, 0), 0);
+
+        while (!arr1.isEmpty()) {
+            arr1.delete(0);
+        }
+
+        assertTrue(!arr1.isFull());
+        assertTrue(arr1.isEmpty());
+        assertEquals(arr2.delete(8), 60);
+        assertEquals(arr2.delete(4), 15);
+        assertEquals(arr2.delete(10), null);
+        assertEquals(arr2.length(), 9);
+        var delete = arr2.delete(new Object[]{13}[0]);
+        System.out.println(Arrays.toString(delete));
+        assertTrue(Arrays.equals(delete, new Integer[]{2, 3}));
+        System.out.println(arr2);
     }
 }
