@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Objects;
 
 class ArrayFullException extends Exception {}
-class ArrayOutOfRange extends Exception {}
 
 public abstract class Array<E> {
     protected int capacity;
