@@ -44,4 +44,17 @@ public class TestImplement {
         assertTrue(x.getArray().contains(5));
         assertTrue(x.getArray().contains(8));
     }
+
+    @Test
+    public void test3() throws ArrayOutOfRange {
+        var x = new PriorityQueue<>(100);
+        x.insert(25);
+        x.insert(12);
+        x.insert(80);
+        x.insert(71);
+        x.insert(71);
+        x.insert(-1);
+
+        System.out.println(x);
+    }
 }
